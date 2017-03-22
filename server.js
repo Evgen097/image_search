@@ -2,7 +2,6 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
-const fs = require('fs');
 var request = require('request');
 const MongoClient    = require('mongodb').MongoClient;
 const db             = require('./config/db');
@@ -36,14 +35,14 @@ function search_result_obj(body){
 }
 
 app.get('/latest', function (req, res, next) {
-    console.log("  Hello, please use path:  'https://myurlshort.herokuapp.com/latest/imagesearch'  or   'https://myurlshort.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
-    res.send("  Hello, please use path:  'https://myurlshort.herokuapp.com/latest/imagesearch'  or   'https://myurlshort.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
+    console.log("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
+    res.send("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
 
 }) 
 
 app.get('/', function (req, res, next) {
-    console.log("  Hello, please use path:  'https://myurlshort.herokuapp.com/latest/imagesearch'  or   'https://myurlshort.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
-    res.send("  Hello, please use path:  'https://myurlshort.herokuapp.com/latest/imagesearch'  or   'https://myurlshort.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
+    console.log("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
+    res.send("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
 })
 
 MongoClient.connect(db.url, (err, database) => {

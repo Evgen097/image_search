@@ -1,12 +1,12 @@
 {
   "name": "image_search",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "engines": {
     "node": "v4.7.3",
     "npm": "2.15.11"
   },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
@@ -14,13 +14,13 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.11.0"
-  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongodb": "^2.2.25",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
