@@ -48,26 +48,7 @@ app.get('/', function (req, res, next) {
 })
 
 
-MongoClient.connect(db.url, (err, database) => {
-  if (err) return console.log(err)
-  
-  app.get('/latest/imagesearch', function (req, res, next) {
-      
-    var result_arr = [];  
-    database.collection('notes').find({
-      }).sort({when: -1}).limit(10)
-.toArray(function(err, docs) {
-        if (err) throw err;
-        for(var i in docs){
-            var obj = { term: docs[i].term, when: docs[i].when };
-            result_arr.push( obj )
-        }
-        console.log('mongo latest ')
-        console.log(result_arr)
-        res.send(result_arr);
-    }) 
-  }) 
-})
+
 
 
 
@@ -95,7 +76,26 @@ node server.js
 
 
 
-
+MongoClient.connect(db.url, (err, database) => {
+  if (err) return console.log(err)
+  
+  app.get('/latest/imagesearch', function (req, res, next) {
+      
+    var result_arr = [];  
+    database.collection('notes').find({
+      }).sort({when: -1}).limit(10)
+.toArray(function(err, docs) {
+        if (err) throw err;
+        for(var i in docs){
+            var obj = { term: docs[i].term, when: docs[i].when };
+            result_arr.push( obj )
+        }
+        console.log('mongo latest ')
+        console.log(result_arr)
+        res.send(result_arr);
+    }) 
+  }) 
+})
 
 
 MongoClient.connect(db.url, (err, database) => {
