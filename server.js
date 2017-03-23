@@ -3,8 +3,8 @@ var app = express()
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
 var request = require('request');
-//const MongoClient    = require('mongodb').MongoClient;
-//const db             = require('./config/db');
+const MongoClient    = require('mongodb').MongoClient;
+const db             = require('./config/db');
 
 
 
@@ -34,15 +34,39 @@ function search_result_obj(body){
     return result_arr;
 }
 
+
 app.get('/latest', function (req, res, next) {
     console.log("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
     res.send("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
 
 }) 
 
+
 app.get('/', function (req, res, next) {
     console.log("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
     res.send("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
+})
+
+
+MongoClient.connect(db.url, (err, database) => {
+  if (err) return console.log(err)
+  
+  app.get('/latest/imagesearch', function (req, res, next) {
+      
+    var result_arr = [];  
+    database.collection('notes').find({
+      }).sort({when: -1}).limit(10)
+.toArray(function(err, docs) {
+        if (err) throw err;
+        for(var i in docs){
+            var obj = { term: docs[i].term, when: docs[i].when };
+            result_arr.push( obj )
+        }
+        console.log('mongo latest ')
+        console.log(result_arr)
+        res.send(result_arr);
+    }) 
+  }) 
 })
 
 
@@ -70,27 +94,7 @@ To run your application run the command:
 node server.js
 
 
-MongoClient.connect(db.url, (err, database) => {
-  if (err) return console.log(err)
-  
-  app.get('/latest/imagesearch', function (req, res, next) {
-      
-    var result_arr = [];  
-    database.collection('notes').find({
-      }).sort({when: -1}).limit(10)
-.toArray(function(err, docs) {
-        if (err) throw err;
-        for(var i in docs){
-            var obj = { term: docs[i].term, when: docs[i].when };
-            result_arr.push( obj )
-        }
-        console.log('mongo latest ')
-        console.log(result_arr)
-        res.send(result_arr);
-    }) 
-  }) 
-  
-})
+
 
 
 
