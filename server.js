@@ -5,6 +5,7 @@ const port = process.env.PORT || 8080;
 var request = require('request');
 const MongoClient    = require('mongodb').MongoClient;
 const db             = require('./config/db');
+//var url = 'mongodb://Evgen097:630ev630@ds137760.mlab.com:37760/myimagesearch';
 
 
 
