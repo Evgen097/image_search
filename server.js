@@ -3,8 +3,8 @@ var app = express()
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
 var request = require('request');
-const MongoClient    = require('mongodb').MongoClient;
-const db             = require('./config/db');
+//const MongoClient    = require('mongodb').MongoClient;
+//const db             = require('./config/db');
 
 
 
@@ -44,6 +44,31 @@ app.get('/', function (req, res, next) {
     console.log("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ")
     res.send("  Hello, please use path:  'https://myimagesearch.herokuapp.com/latest/imagesearch'  or   'https://myimagesearch.herokuapp.com/api/imagesearch/hotdog%20offset=20'   ");
 })
+
+
+
+app.listen(port, function () {
+  console.log("Server has started.")
+})
+
+
+
+/*
+key for bing:  b2719d54a3ac423d85b138cfac4d1809
+npm run dev
+
+Check your git status by entering the command 'git status' into the console.
+Add your files with the command 'git add .'
+Commit your changes with 'git commit -m "initial commit".
+Create a new GitHub repository. Then copy its .git URL.
+Return to c9.io's terminal and set your GitHub remote URL: 'git remote add origin https://github.com/Evgen097/timestemp.git' followed by the URL you copied from GitHub.
+Run 'git push origin master'
+
+Open up your application in a preview tab by clicking Window > Share > Application > Open
+
+To run your application run the command: 
+node server.js
+
 
 MongoClient.connect(db.url, (err, database) => {
   if (err) return console.log(err)
@@ -117,32 +142,5 @@ app.get('/api/imagesearch/:id', function (req, res, next) {
 
 });
 
-
-
-app.listen(port, function () {
-  console.log("Server has started.")
-})
-
-
-
-/*
-key for bing:  b2719d54a3ac423d85b138cfac4d1809
-npm run dev
-
-request({
-    url: 'https://api.cognitive.microsoft.com/bing/v5.0/images/search?q=cats&count=4&offset=0', //URL to hit
-    //qs: {from: 'blog example', time: +new Date()}, //Query string data
-    method: 'GET', //Specify the method
-    headers: { //We can define headers too
-        'Host': 'api.cognitive.microsoft.com',
-        'Ocp-Apim-Subscription-Key': 'b2719d54a3ac423d85b138cfac4d1809'
-    }
-}, function(error, response, body){
-    if(error) {
-        console.log(error);
-    } else {
-        console.log('Hello World!');
-        res.send(body)
-    }
 
 */
